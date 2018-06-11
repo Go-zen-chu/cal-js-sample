@@ -1,65 +1,13 @@
 $(document).ready(function() {
 
-  $('#calendar').fullCalendar({
-    defaultDate: '2018-03-12',
-    editable: true,
-    eventLimit: true, // allow "more" link when too many events
-    events: [
-      {
-        title: 'All Day Event',
-        start: '2018-03-01'
-      },
-      {
-        title: 'Long Event',
-        start: '2018-03-07',
-        end: '2018-03-10'
-      },
-      {
-        id: 999,
-        title: 'Repeating Event',
-        start: '2018-03-09T16:00:00'
-      },
-      {
-        id: 999,
-        title: 'Repeating Event',
-        start: '2018-03-16T16:00:00'
-      },
-      {
-        title: 'Conference',
-        start: '2018-03-11',
-        end: '2018-03-13'
-      },
-      {
-        title: 'Meeting',
-        start: '2018-03-12T10:30:00',
-        end: '2018-03-12T12:30:00'
-      },
-      {
-        title: 'Lunch',
-        start: '2018-03-12T12:00:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2018-03-12T14:30:00'
-      },
-      {
-        title: 'Happy Hour',
-        start: '2018-03-12T17:30:00'
-      },
-      {
-        title: 'Dinner',
-        start: '2018-03-12T20:00:00'
-      },
-      {
-        title: 'Birthday Party',
-        start: '2018-03-13T07:00:00'
-      },
-      {
-        title: 'Click for Google',
-        url: 'http://google.com/',
-        start: '2018-03-28'
-      }
-    ]
-  });
+  var d = new Date();
+  var month = d.getMonth()+1;
+  var day = d.getDate();
+  // YYYY-MM-DD
+  var todayStr = d.getFullYear() + '-' + (month<10 ? '0' : '') + month + '-' + (day<10 ? '0' : '') + day;
 
+  $.getJSON('https://github.com/Go-zen-chu/cal-js-sample/blob/master/events.json', function(ed) {
+    ed['defaultDate'] = todayStr;
+    $('#calendar').fullCalendar(ed);
+  });
 });
